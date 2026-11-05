@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Microsoft AI in Action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+*{box-sizing:border-box}
+img{max-width:100%}
+body{margin:0}
+:root {
+  --navy: #142440;
+  --green: #16AD8C;
+  --green-text: #0B7A63;
+  --mint: #3ED1B0;
+  --bg: #F6F8F6;
+  --surface: #FFFFFF;
+  --tint: #E5F4F1;
+  --ink: #142440;
+  --ink-muted: #3D4F62;
+  --line: #E1E7EC;
+  --on-dark: #FFFFFF;
+  --on-dark-muted: #D3E1EC;
+  --font: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1A2E; --surface: #16243C; --tint: #1A3A42; --ink: #EEF3F7; --ink-muted: #B7C7D4;
+    --line: #26385A; --green-text: #3ED1B0; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1A2E; --surface: #16243C; --tint: #1A3A42; --ink: #EEF3F7; --ink-muted: #B7C7D4;
+  --line: #26385A; --green-text: #3ED1B0; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 640px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+ 
+.hero { position: relative; overflow: hidden; background: var(--navy); color: var(--on-dark); }
+.hero::before { content: ""; position: absolute; inset: 0; background-image: url("texture.svg"); background-size: cover; background-position: 70% 20%; opacity: .9; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,36,64,.55) 0%, rgba(20,36,64,.85) 70%, rgba(20,36,64,.95) 100%); }
+.hero .wrap { position: relative; z-index: 1; padding-block: 28px 32px; display: flex; flex-direction: column; gap: 18px; }
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #FFFFFF; border-radius: 12px; padding: 10px 16px; }
+.logos img { display: block; height: 22px; width: auto; }
+.logos img.proge { height: 30px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--on-dark-muted); margin: 6px 0 0; }
+h1 { margin: 0; font-size: clamp(40px, 11vw, 60px); line-height: 1; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+h1 span { display: block; color: var(--mint); }
+.bar { width: 56px; height: 5px; background: var(--green); }
+.sub { margin: 0; font-size: 19px; font-weight: 500; color: var(--on-dark-muted); }
+.facts { display: grid; gap: 10px; margin: 4px 0 0; padding: 0; list-style: none; }
+.facts li { display: flex; gap: 12px; align-items: center; font-size: 16px; }
+.facts .ic { width: 36px; height: 36px; flex-shrink: 0; border-radius: 999px; border: 1.5px solid var(--mint); display: grid; place-items: center; color: var(--mint); }
+.facts strong { font-weight: 700; }
+ 
+nav.jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+nav.jump .wrap { display: flex; gap: 8px; padding-block: 10px; overflow-x: auto; }
+nav.jump a { flex-shrink: 0; text-decoration: none; color: var(--green-text); background: var(--tint); font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 999px; }
+nav.jump a:focus-visible, button:focus-visible, .btn:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+ 
+main .wrap { display: flex; flex-direction: column; gap: 16px; padding-block: 20px 40px; }
+section.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; scroll-margin-top: 70px; }
+section.card h2 { margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green-text); margin: 0 0 6px; }
+.muted { color: var(--ink-muted); margin: 0; }
+ 
+.agenda { list-style: none; margin: 14px 0 0; padding: 0; display: grid; }
+.agenda li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.agenda li > div { min-width: 0; }
+.agenda li:first-child { border-top: 0; }
+.agenda .tm { display: flex; flex-direction: column; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.agenda .tm time { font-weight: 800; color: var(--green-text); }
+.agenda .tm span { font-size: 13px; color: var(--ink-muted); }
+.agenda .kind { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green-text); margin-bottom: 2px; }
+.agenda .t { display: block; font-weight: 700; line-height: 1.35; }
+.agenda .desc { display: block; font-size: 14px; color: var(--ink-muted); margin-top: 2px; }
+.agenda .who { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-top: 4px; }
+.agenda li.pause .t { font-weight: 600; color: var(--ink-muted); }
+ 
+.field { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; margin-top: 10px; border-radius: 12px; background: var(--tint); min-width: 0; }
+.field .k { font-size: 13px; color: var(--ink-muted); display: block; }
+.field .v { font-weight: 800; font-size: 18px; word-break: break-all; }
+button.copy { flex-shrink: 0; font: inherit; font-weight: 700; font-size: 14px; border: 0; border-radius: 999px; padding: 9px 14px; background: var(--navy); color: #FFFFFF; cursor: pointer; }
+:root[data-theme="dark"] button.copy { background: var(--green); color: #0E1A2E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.copy { background: var(--green); color: #0E1A2E; } }
+ 
+.btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; text-decoration: none; font-weight: 700; padding: 12px 18px; border-radius: 999px; background: var(--green); color: #0E1A2E; }
+.btn[aria-disabled="true"] { background: var(--line); color: var(--ink-muted); pointer-events: none; }
+ 
+footer { text-align: center; color: var(--ink-muted); font-size: 14px; }
+footer .wrap { padding-block: 0 32px; }
+footer .mail { font-weight: 700; color: var(--ink); user-select: all; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<div class="logos">
+<img class="proge" src="proge.png" alt="Progesoftware">
+<img src="td-synnex.png" alt="TD SYNNEX">
+<img src="microsoft.png" alt="Microsoft">
+</div>
+<p class="eyebrow">Evento riservato · Roma</p>
+<h1>Microsoft <span>AI in Action</span></h1>
+<div class="bar" aria-hidden="true"></div>
+<p class="sub">Dall'AI sperimentale all'AI governata.</p>
+<ul class="facts">
+<li><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></span><span><strong>Martedì 24 novembre 2026</strong> · 9:00–14:00</span></li>
+<li><span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span><span><strong>Chalet del Lago</strong> · Roma EUR</span></li>
+</ul>
+</div>
+</header>
+ 
+<nav class="jump" aria-label="Sezioni">
+<div class="wrap">
+<a href="#agenda">Agenda</a>
+<a href="#wifi">Wi-Fi</a>
+<a href="#materiali">Slide e materiali</a>
+</div>
+</nav>
+ 
+<main>
+<div class="wrap">
+<section class="card" id="agenda">
+<p class="label">Programma</p>
+<h2>Agenda</h2>
+<ol class="agenda">
+<li class="pause"><div class="tm"><time>09:00</time><span>09:50</span></div><div><span class="t">Welcome Coffee &amp; Registration</span></div></li>
+<li><div class="tm"><time>09:50</time><span>10:00</span></div><div><span class="kind">Apertura</span><span class="t">Cosa significa essere una AI Frontier Firm</span><span class="who">Marco Meneo, CEO di Proge-Software</span></div></li>
+<li><div class="tm"><time>10:00</time><span>10:20</span></div><div><span class="t">AI-powered productivity</span><span class="desc">Dall'assistente personale al lavoro aumentato dall'AI</span></div></li>
+<li><div class="tm"><time>10:20</time><span>10:40</span></div><div><span class="t">Agentic AI</span><span class="desc">Dai casi d'uso agli agenti che trasformano i processi</span></div></li>
+<li><div class="tm"><time>10:40</time><span>11:00</span></div><div><span class="t">AI Security &amp; Governance</span><span class="desc">Proteggere identità, dati e controllare i costi</span></div></li>
+<li><div class="tm"><time>11:00</time><span>11:20</span></div><div><span class="kind">Keynote Microsoft</span><span class="t">Sovranità Digitale</span><span class="desc">Mantenere il controllo su dati e AI, preservando autonomia, sicurezza e conformità.</span><span class="who">Irene Sardellitti, NTO di Microsoft</span></div></li>
+<li><div class="tm"><time>11:20</time><span>11:50</span></div><div><span class="kind">Sessione TD SYNNEX</span><span class="t">I modelli di Licensing Microsoft per l'AI</span><span class="who">A cura di TD SYNNEX</span></div></li>
+<li class="pause"><div class="tm"><time>11:50</time><span>12:00</span></div><div><span class="t">Coffee Break</span></div></li>
+<li><div class="tm"><time>12:00</time><span>12:30</span></div><div><span class="t">Proge AI Factory</span><span class="desc">Il modello di servizio gestito dedicato all'AI</span></div></li>
+<li><div class="tm"><time>12:30</time><span>12:50</span></div><div><span class="t">Case History</span><span class="desc">L'esperienza concreta di un Cliente</span></div></li>
+<li><div class="tm"><time>12:50</time><span>13:00</span></div><div><span class="kind">Chiusura</span><span class="t">Conoscenza, Esperienza, Etica</span><span class="desc">Tre parole chiave per guidare il futuro dell'AI.</span><span class="who">Bruno Meneo, Founder di Proge-Software</span></div></li>
+<li class="pause"><div class="tm"><time>13:00</time><span>14:00</span></div><div><span class="t">Networking Lunch</span></div></li>
+</ol>
+</section>
+ 
+    <section class="card" id="wifi">
+<p class="label">Connessione</p>
+<h2>Wi-Fi dell'evento</h2>
+<p class="muted">Collegati alla rete qui sotto e inserisci la password.</p>
+<div class="field"><div style="min-width:0"><span class="k">Rete</span><span class="v" id="ssid">[nome rete]</span></div><button class="copy" type="button" data-target="ssid">Copia</button></div>
+<div class="field"><div style="min-width:0"><span class="k">Password</span><span class="v" id="pwd">[password]</span></div><button class="copy" type="button" data-target="pwd">Copia</button></div>
+</section>
+ 
+    <section class="card" id="materiali">
+<p class="label">Dopo l'evento</p>
+<h2>Slide e materiali</h2>
+<p class="muted">Qui troverai le presentazioni degli interventi e la versione digitale del Prompt Deck.</p>
+<a class="btn" href="#" aria-disabled="true">Disponibili dal 25 novembre</a>
+</section>
+</div>
+</main>
+ 
+<footer>
+<div class="wrap">
+<p>Per informazioni scrivi a <span class="mail">marketing@progesoftware.it</span></p>
+</div>
+</footer>
+ 
+<script>
+document.querySelectorAll('button.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var el = document.getElementById(b.dataset.target);
+    var txt = el.textContent.trim();
+    var done = function () { var o = b.textContent; b.textContent = 'Copiato'; setTimeout(function () { b.textContent = o; }, 1500); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
