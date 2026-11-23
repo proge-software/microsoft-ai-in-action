@@ -11,6 +11,7 @@
 *{box-sizing:border-box}
 img{max-width:100%}
 body{margin:0}
+/* Layout: navy event header with the network texture, then stacked info cards a guest scans on a phone at the venue. */
 :root {
   --navy: #142440;
   --green: #16AD8C;
@@ -46,6 +47,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font); font-
 .logos { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #FFFFFF; border-radius: 12px; padding: 10px 16px; }
 .logos img { display: block; height: 22px; width: auto; }
 .logos img.proge { height: 30px; }
+.logos img { min-width: 0; flex: 0 1 auto; object-fit: contain; }
 .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--on-dark-muted); margin: 6px 0 0; }
 h1 { margin: 0; font-size: clamp(40px, 11vw, 60px); line-height: 1; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
 h1 span { display: block; color: var(--mint); }
@@ -90,12 +92,13 @@ button.copy { flex-shrink: 0; font: inherit; font-weight: 700; font-size: 14px; 
  
 .btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; text-decoration: none; font-weight: 700; padding: 12px 18px; border-radius: 999px; background: var(--green); color: #0E1A2E; }
 .btn[aria-disabled="true"] { background: var(--line); color: var(--ink-muted); pointer-events: none; }
+.note { font-size: 13px; color: var(--ink-muted); margin: 8px 0 0; }
  
 footer { text-align: center; color: var(--ink-muted); font-size: 14px; }
 footer .wrap { padding-block: 0 32px; }
 footer .mail { font-weight: 700; color: var(--ink); user-select: all; }
-html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
@@ -120,7 +123,7 @@ html { scroll-behavior: smooth; }
 <nav class="jump" aria-label="Sezioni">
 <div class="wrap">
 <a href="#agenda">Agenda</a>
-<a href="#materiali">Slide e materiali</a>
+<a href="#materiali">Presentazione</a>
 </div>
 </nav>
  
@@ -131,26 +134,27 @@ html { scroll-behavior: smooth; }
 <h2>Agenda</h2>
 <ol class="agenda">
 <li class="pause"><div class="tm"><time>09:00</time><span>09:50</span></div><div><span class="t">Welcome Coffee &amp; Registration</span></div></li>
-<li><div class="tm"><time>09:50</time><span>10:00</span></div><div><span class="kind">Apertura</span><span class="t">Cosa significa essere una AI Frontier Firm</span><span class="who">Marco Meneo, CEO di Proge-Software</span></div></li>
-<li><div class="tm"><time>10:00</time><span>10:20</span></div><div><span class="t">AI-powered productivity</span><span class="desc">Dall'assistente personale al lavoro aumentato dall'AI</span></div></li>
-<li><div class="tm"><time>10:20</time><span>10:40</span></div><div><span class="t">Agentic AI</span><span class="desc">Dai casi d'uso agli agenti che trasformano i processi</span></div></li>
-<li><div class="tm"><time>10:40</time><span>11:00</span></div><div><span class="t">AI Security &amp; Governance</span><span class="desc">Proteggere identità, dati e controllare i costi</span></div></li>
-<li><div class="tm"><time>11:00</time><span>11:20</span></div><div><span class="kind">Keynote Microsoft</span><span class="t">Sovranità Digitale</span><span class="desc">Mantenere il controllo su dati e AI, preservando autonomia, sicurezza e conformità.</span><span class="who">Irene Sardellitti, NTO di Microsoft</span></div></li>
-<li><div class="tm"><time>11:20</time><span>11:50</span></div><div><span class="kind">Sessione TD SYNNEX</span><span class="t">I modelli di Licensing Microsoft per l'AI</span><span class="who">A cura di TD SYNNEX</span></div></li>
+<li><div class="tm"><time>09:50</time><span>10:00</span></div><div><span class="kind">Apertura</span><span class="t">Cosa significa essere una AI Frontier Firm</span><span class="who">Marco Meneo, CEO – Proge-Software</span></div></li>
+<li><div class="tm"><time>10:00</time><span>10:20</span></div><div><span class="t">AI-powered productivity</span><span class="desc">Dall'assistente personale al lavoro aumentato dall'AI</span><span class="who">Marco Nicoletti, Project Manager – Proge-Software</span></div></li>
+<li><div class="tm"><time>10:20</time><span>10:40</span></div><div><span class="t">Agentic AI</span><span class="desc">Dai casi d'uso agli agenti che trasformano i processi</span><span class="who">Arianna Manchia, AI Specialist – Proge-Software</span></div></li>
+<li><div class="tm"><time>10:40</time><span>11:00</span></div><div><span class="t">AI Security &amp; Governance</span><span class="desc">Proteggere identità, dati e controllare i costi</span><span class="who">Daniele Brancaleone, Security Architect – Proge-Software</span></div></li>
+<li><div class="tm"><time>11:00</time><span>11:20</span></div><div><span class="kind">Keynote Microsoft</span><span class="t">Sovranità Digitale</span><span class="desc">Mantenere il controllo su dati e AI, preservando autonomia, sicurezza e conformità.</span><span class="who">Irene Sardellitti, NTO – Microsoft</span></div></li>
+<li><div class="tm"><time>11:20</time><span>11:50</span></div><div><span class="kind">Sessione TD SYNNEX</span><span class="t">I modelli di Licensing Microsoft per l'AI</span><span class="who">Michele Ruberti, Business Developer Manager – TD SYNNEX</span></div></li>
 <li class="pause"><div class="tm"><time>11:50</time><span>12:00</span></div><div><span class="t">Coffee Break</span></div></li>
-<li><div class="tm"><time>12:00</time><span>12:30</span></div><div><span class="t">Proge AI Factory</span><span class="desc">Il modello di servizio gestito dedicato all'AI</span></div></li>
-<li><div class="tm"><time>12:30</time><span>12:50</span></div><div><span class="t">Case History</span><span class="desc">L'esperienza concreta di un Cliente</span></div></li>
-<li><div class="tm"><time>12:50</time><span>13:00</span></div><div><span class="kind">Chiusura</span><span class="t">Conoscenza, Esperienza, Etica</span><span class="desc">Tre parole chiave per guidare il futuro dell'AI.</span><span class="who">Bruno Meneo, Founder di Proge-Software</span></div></li>
+<li><div class="tm"><time>12:00</time><span>12:30</span></div><div><span class="t">Proge AI Factory</span><span class="desc">Il modello di servizio gestito dedicato all'AI</span><span class="who">Matteo Sposito, App &amp; Data Sales Director – Proge-Software</span></div></li>
+<li><div class="tm"><time>12:30</time><span>12:50</span></div><div><span class="t">Case History</span><span class="desc">L'esperienza concreta di realtà che hanno intrapreso un percorso di adozione dell'AI</span><span class="who">Filippo Della Cananea, Responsabile Transizione Digitale – Lazio Innova</span><span class="who">Giovanni Tomasello, Responsabile Infrastructure &amp; Security – Proge-Software</span><span class="who">Monica Macrì, Responsabile Progetto – Futnet S.r.l.</span></div></li>
+<li><div class="tm"><time>12:50</time><span>13:00</span></div><div><span class="kind">Chiusura</span><span class="t">Conoscenza, Esperienza, Etica</span><span class="desc">Tre parole chiave per guidare il futuro dell'AI.</span><span class="who">Bruno Meneo, Founder – Proge-Software</span></div></li>
 <li class="pause"><div class="tm"><time>13:00</time><span>14:00</span></div><div><span class="t">Networking Lunch</span></div></li>
 </ol>
 </section>
  
- 
     <section class="card" id="materiali">
-<p class="label">Dopo l'evento</p>
-<h2>Slide e materiali</h2>
-<p class="muted">Qui troverai le presentazioni degli interventi e la versione digitale del Prompt Deck.</p>
-<a class="btn" href="#" aria-disabled="true">Disponibili dal 25 novembre</a>
+<p class="label">Materiali</p>
+<h2>Presentazione</h2>
+<p class="muted">Le slide presentate durante l'evento.</p>
+<a class="btn" href="#" aria-disabled="true">Scarica</a>
+<p class="muted" style="margin-top:24px">Microsoft Ignite 2026, l'evento più importante dell'anno per Microsoft, si è appena concluso: qui trovi tutti gli annunci e le novità.</p>
+<a class="btn" href="https://news.microsoft.com/events/ignite/2026/" target="_blank" rel="noopener" style="background:#0078D4;color:#fff;display:inline-flex;align-items:center;gap:10px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEO0lEQVR42u2Yy28cRRCHv+rumd3ZWW/8SGIpjp04QYFISeCAkOCSAwpCQkLihvKP8AcgIW6ccuTKjQs3hHKAQ0AC8YgTIqEoDrExeTixvWt7HzNdxWEJrxs7lhDSlDS36ar6ump6+ley98mH7yU+LI8OH70qMU5hRCY1B86CWuzP4MJ+duzcFVleHtxY+/gdn47mtfT3DbzD2aQhVM2c1zRNw7SSfRrY3HglWfniouvb2z5vgOrE+WOGJSn2aBO3/Azd18O1B/2fHn619u77qxvfkictnIAycf4IQqEl5pQT6cXLwbJskx9X4u6t+8pC4ikLQCbcHoMsRe6Oys75zSAXLwWaz03d27phX9++GedyBEMmT3+cWQTrDqF9arEZcIlnbs7L6T4yv+gqAZhCI8Nk1XNsxtGZd56pzaApC9MudFJviglVzbBOphJ8eBAAiBGKERQFxKJSC+E9FCWUJVDicM4wKU1Rq9Y+TyugJhSmmKl3/M+tBqgBaoAaoAaoAWqAGqAGqAH+OwuIN5LEaCRmaWKUVNMDSQppMEIwCCiqgrMgTrwLJqZU0wOCE7PEECeuDNLbbHB3XbjTdaF7SyhjFaUETU+5Gh3ZloTehnU5eaSQgdx7ovHw1MjbAey6KrI1gDMzcTnE2YXV+Oqb6Nn7NmxnQ1GVyQtgIiFEzu2lg8XjOmjM7bh+e3spf0Ebz2ZeYigNxAxBJpBmhgAmiCctOdo8fUdEBF1fWWI6Kq2lXdjzdCck6ADkkcf32gyGIsdfWgP4eXvldN6UhjbaWzki+/tVujSzdl4kxXDQ3GmcWgvfdfXo1ZLTw33kSFG6smxP7v0xhAC9xgV9uNcvzOwXEdGlwW5OK58pejtzlHBo4qkBwLYlClk28unDBxq+2dj74PNRfvnXJzDbDESb3LsB3sGTPix0MmaTnRfNrq/rrSs/uJ1VEm2NP3R5+vYkQWS8Nh3iiudvh++72v7oZhnjo26kjUcrn2uwLeXJk53kQq7t10a9I277S7hzvSTjIEYqY4IRuDPZsTDrJc51nN8cCUkuXq3aIZR4GBpMt3CLoYQ02YmWme+4QBoMOYC5kGK0ooiTjeDGRyvKn08VAANUxgOcEAAyxCE4BYkciImBKDizoH+JbJN35t8AsHGrj/+JQ/nDOVSM8M9gJvVdqAaoAWqAGqAGqAFqgBqgBvi318iDcmUSHOAciB/LQakoaLwDcWOfzQDgo5kznAjOAb46hNrvmsCVoW/Kft/MesShWWVBUAZgV+JeH9b7QRnudLwUyq4ZWSEHVsQSbE5nwkjF5S0vYSZPG7nHqlTAxipsX9RPH/KUPihFGpie9/RmoNGkUoC/WhyBm5kN5w+5/ROH421fDK85JYg4w01WB1MkiJXdgnbDD3ffiOUN2i/3Rq23roSzl46rNXtm6kREq2ySYBLS2Lbh1Ge/AS4m+jHclWgwAAAAAElFTkSuQmCC" alt="" width="20" height="20" style="display:block">Le novità di Microsoft Ignite</a>
 </section>
 </div>
 </main>
